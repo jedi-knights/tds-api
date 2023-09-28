@@ -14,7 +14,7 @@ func GetLogger() *zap.Logger {
 		lock.Lock()
 		defer lock.Unlock()
 		if singleInstance == nil {
-			singleInstance, _ = zap.NewDevelopment()
+			singleInstance, _ = zap.NewProduction()
 		}
 	}
 
