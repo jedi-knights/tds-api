@@ -3,7 +3,8 @@ package pkg
 type Division int
 
 const (
-	DivisionDI = iota
+	DivisionAll = iota
+	DivisionDI
 	DivisionDII
 	DivisionDIII
 	DivisionNAIA
@@ -32,11 +33,15 @@ func DivisionToString(division Division) string {
 	case DivisionNJCAA:
 		return "njcaa"
 	default:
-		return ""
+		return "all"
 	}
 }
 
-func DivisionFromString(division string) Division {
+func StringToDivision(division string) Division {
+	if division == "" {
+		return DivisionAll
+	}
+
 	switch division {
 	case "di":
 		return DivisionDI

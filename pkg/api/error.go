@@ -24,3 +24,38 @@ func InternalServerError(r string) Error {
 		Msg:    "internal server error: " + r,
 	}
 }
+
+func BadRequestError(r string) Error {
+	return Error{
+		Status: http.StatusBadRequest,
+		Msg:    "bad request: " + r,
+	}
+}
+
+func ForbiddenError(r string) Error {
+	return Error{
+		Status: http.StatusForbidden,
+		Msg:    "forbidden: " + r,
+	}
+}
+
+func UnauthorizedError(r string) Error {
+	return Error{
+		Status: http.StatusUnauthorized,
+		Msg:    "unauthorized: " + r,
+	}
+}
+
+func ConflictError(r string) Error {
+	return Error{
+		Status: http.StatusConflict,
+		Msg:    "conflict: " + r,
+	}
+}
+
+func UnprocessableEntityError(r string) Error {
+	return Error{
+		Status: http.StatusUnprocessableEntity,
+		Msg:    "unprocessable entity: " + r,
+	}
+}
