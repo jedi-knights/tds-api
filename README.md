@@ -1,6 +1,6 @@
 # TopDrawerSoccer API
 
-![GitHub Actions](https://github.com/jedi-knights/tds-api/workflows/build/badge.svg)
+![GitHub Actions](https://github.com/jedi-knights/tds-api/workflows/CI/badge.svg)
 
 
 
