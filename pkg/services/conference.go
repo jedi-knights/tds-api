@@ -39,13 +39,15 @@ func NewConference() *ConferenceService {
 func (s ConferenceService) GetConferencesByDivision(division pkg.Division) ([]models.Conference, error) {
 	var err error
 
-	s.logger.Debug("GetConferencesByDivision", zap.String("division", pkg.DivisionToString(division)))
+	divisionString := pkg.DivisionToString(division)
+
+	s.logger.Debug("GetConferencesByDivision", zap.String("division", divisionString))
 
 	conferences := []models.Conference{}
 
 	url, ok := divisionToUrlMapping[division]
 	if !ok {
-		return nil, fmt.Errorf("the division %s is not supported", division)
+		return nil, fmt.Errorf("the division %s is not supported", divisionString)
 	}
 
 	c := colly.NewCollector()
