@@ -13,6 +13,15 @@ import (
 
 var logger = api.GetLogger()
 
+// ListConferenceNames godoc
+// @Summary List conference names
+// @Description List all conference names
+// @Tags conference
+// @Accept json
+// @Produce json
+// @Success 200 {array} string
+// @Failure 500 {object} api.Error
+// @Router /conference/names [get]
 func HandleGetConferenceNames(c echo.Context) error {
 	logger.Debug("HandleGetConferenceNames")
 
@@ -32,6 +41,15 @@ func HandleGetConferenceNames(c echo.Context) error {
 	return c.JSON(http.StatusOK, conferenceNames)
 }
 
+// ListConferences godoc
+// @Summary List conferences
+// @Description List all conferences
+// @Tags conference
+// @Accept json
+// @Produce json
+// @Success 200 {array} models.Conference
+// @Failure 500 {object} api.Error
+// @Router /conferences [get]
 func HandleGetConferences(c echo.Context) error {
 	var (
 		err         error
