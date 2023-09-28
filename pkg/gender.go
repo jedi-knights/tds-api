@@ -6,6 +6,7 @@ const (
 	GenderBoth = iota
 	GenderFemale
 	GenderMale
+	GenderUnknown
 )
 
 func GenderToString(gender Gender) string {
@@ -21,7 +22,11 @@ func GenderToString(gender Gender) string {
 	}
 }
 
-func GenderFromString(gender string) Gender {
+func StringToGender(gender string) Gender {
+	if gender == "" {
+		return GenderBoth
+	}
+	
 	switch gender {
 	case "both":
 		return GenderBoth
@@ -30,6 +35,6 @@ func GenderFromString(gender string) Gender {
 	case "male":
 		return GenderMale
 	default:
-		return GenderBoth
+		return GenderUnknown
 	}
 }
