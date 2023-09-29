@@ -33,3 +33,7 @@ I've created this repo with the following directories under the pkg directory.
 * models (contains the data models)
 * services (contains the business logic)
 
+
+## References
+
+* [echo-swagger](https://github.com/swaggo/echo-swagger)

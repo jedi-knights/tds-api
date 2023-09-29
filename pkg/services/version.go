@@ -1,5 +1,7 @@
 package services
 
+import "github.com/jedi-knights/tds-api/pkg"
+
 type VersionService struct{}
 
 func NewVersion() *VersionService {
@@ -7,5 +9,5 @@ func NewVersion() *VersionService {
 }
 
 func (s *VersionService) GetVersion() (string, error) {
-	return "1.0.0", nil
+	return pkg.Version, nil
 }

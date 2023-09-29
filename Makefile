@@ -1,7 +1,11 @@
+.PHONY: clean docs deps build mocks test lint
 
 clean:
 	rm -f tds
 	rm -f junit.xml
+
+docs:
+	~/go/bin/swag init -g main.go
 
 deps:
 	go mod tidy
@@ -20,3 +24,6 @@ test: clean mocks
 
 lint:
 	golangci-lint run ./...
+
+run: docs
+	go run main.go

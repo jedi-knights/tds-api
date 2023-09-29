@@ -1,0 +1,180 @@
+basePath: /api/v1
+definitions:
+  api.Error:
+    properties:
+      msg:
+        type: string
+      status:
+        type: integer
+    type: object
+  models.Conference:
+    properties:
+      division:
+        type: string
+      gender:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      url:
+        type: string
+    type: object
+  models.HealthCheckResponse:
+    properties:
+      message:
+        type: string
+    type: object
+  models.Team:
+    properties:
+      conference_id:
+        type: integer
+      conference_name:
+        type: string
+      conference_url:
+        type: string
+      division:
+        type: string
+      gender:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      url:
+        type: string
+    type: object
+  models.VersionResponse:
+    properties:
+      version:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: omar.crosby@gmail.com
+    name: Omar Crosby
+  description: This is a simple API providing access to data from TopDrawerSoccer.
+  title: TopDrawerSoccer API
+  version: "1.0"
+paths:
+  /conferences/:division:
+    get:
+      consumes:
+      - application/json
+      description: Get a list of conferences
+      parameters:
+      - default: all
+        description: Specify a division you are interested in
+        enum:
+        - all
+        - di
+        - dii
+        - diii
+        - naia
+        - njcaa
+        in: query
+        name: division
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Conference'
+            type: array
+      summary: Get a list of conferences
+      tags:
+      - Conferences
+  /health:
+    get:
+      consumes:
+      - application/json
+      description: Check if the API is up and running
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.HealthCheckResponse'
+      summary: Health Check
+      tags:
+      - Admin
+  /teams:
+    get:
+      consumes:
+      - application/json
+      description: Get a list of teams
+      parameters:
+      - default: both
+        description: Specify a gender
+        enum:
+        - both
+        - male
+        - female
+        in: query
+        name: gender
+        type: string
+      - default: all
+        description: Specify a division you are interested in
+        enum:
+        - all
+        - di
+        - dii
+        - diii
+        - naia
+        - njcaa
+        in: query
+        name: division
+        type: string
+      - description: Specify a conference you are interested in
+        in: query
+        name: conference
+        type: string
+      - description: The name of the entity you are looking for
+        in: query
+        name: name
+        type: string
+      - description: A partial name of the entity you are looking for
+        in: query
+        name: nameLike
+        type: string
+      - description: Specify a target id
+        in: query
+        name: id
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Team'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/api.Error'
+      summary: Get a list of teams
+      tags:
+      - Teams
+  /version:
+    get:
+      consumes:
+      - application/json
+      description: Get the current version of the API
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.VersionResponse'
+      summary: Get the API's current version
+      tags:
+      - Admin
+swagger: "2.0"

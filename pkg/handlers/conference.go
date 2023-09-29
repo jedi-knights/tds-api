@@ -11,59 +11,22 @@ import (
 	"strconv"
 )
 
-var logger = api.GetLogger()
-
-// ListConferenceNames godoc
-// @Summary List conference names
-// @Description List all conference names
-// @Tags conference
-// @Accept json
-// @Produce json
-// @Success 200 {array} string
-// @Failure 500 {object} api.Error
-// @Router /conference/names [get]
-func HandleGetConferenceNames(c echo.Context) error {
-	logger.Debug("HandleGetConferenceNames")
-
-	var (
-		err             error
-		conferenceNames []string
-	)
-
-	svc := services.NewConference()
-
-	if conferenceNames, err = svc.GetConferenceNames(); err != nil {
-		return api.InternalServerError("failed to retrieve conference names: " + err.Error())
-	}
-
-	c.Response().Header().Set("X-Total-Count", strconv.Itoa(len(conferenceNames)))
-
-	return c.JSON(http.StatusOK, conferenceNames)
-}
-
-// ListConferences godoc
-// @Summary List conferences
-// @Description List all conferences
-// @Tags conference
-// @Accept json
-// @Produce json
+// HandleGetConferences godoc
+// @Summary Get a list of conferences
+// @Description Get a list of conferences
+// @Tags Conferences
+// @Accept  json
+// @Produce  json
+// @Param division query string false "Specify a division you are interested in" Enums(all,di,dii,diii,naia,njcaa) Default(all)
 // @Success 200 {array} models.Conference
-// @Failure 500 {object} api.Error
-// @Router /conferences [get]
+// @Router /conferences/:division [get]
 func HandleGetConferences(c echo.Context) error {
 	var (
 		err         error
 		conferences []models.Conference
 	)
 
-	logger.Debug("HandleGetConferences")
-
-	genderString := c.QueryParam("gender")
-	gender := pkg.StringToGender(genderString)
-
-	if gender == pkg.GenderUnknown {
-		return api.BadRequestError("expected gender to be (male|female|both)")
-	}
+	api.GetLogger().Debug("HandleGetConferences")
 
 	divisionString := c.QueryParam("division")
 	division := pkg.StringToDivision(divisionString)
@@ -72,15 +35,14 @@ func HandleGetConferences(c echo.Context) error {
 		return api.BadRequestError("expected division to be (di|dii|diii|naia|njcaa)")
 	}
 
-	logger.Debug("gender", zap.String("gender", genderString))
-	logger.Debug("division", zap.String("division", divisionString))
+	api.GetLogger().Debug("division", zap.String("division", divisionString))
 
 	svc := services.NewConference()
 
 	res := c.Response()
 	header := res.Header()
 
-	if conferences, err = svc.GetConferencesByGenderAndDivision(gender, division); err != nil {
+	if conferences, err = svc.GetConferencesByDivision(division); err != nil {
 		header.Set("X-Total-Count", "0")
 
 		return api.InternalServerError("failed to retrieve conferences: " + err.Error())

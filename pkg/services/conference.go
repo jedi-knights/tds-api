@@ -47,8 +47,13 @@ func (s ConferenceService) GetConferencesByDivision(division pkg.Division) ([]mo
 
 	conferences := []models.Conference{}
 
+	if division == pkg.DivisionAll {
+		return s.GetConferences()
+	}
+
 	url, ok := divisionToUrlMapping[division]
 	if !ok {
+		s.logger.Error("unsupported division", zap.String("division", divisionString))
 		return nil, fmt.Errorf("the division %s is not supported", divisionString)
 	}
 
@@ -70,10 +75,20 @@ func (s ConferenceService) GetConferencesByDivision(division pkg.Division) ([]mo
 	})
 
 	c.OnError(func(r *colly.Response, err error) {
-		fmt.Println("Request URL:", r.Request.URL, "failed with response:", r, "\nError:", err)
+		s.logger.Error("failed to retrieve conferences by division",
+			zap.String("url", r.Request.URL.String()),
+			zap.String("division", divisionString),
+			zap.Error(err),
+		)
 	})
 
 	if err = c.Visit(url); err != nil {
+		s.logger.Error("failed to retrieve conferences by division",
+			zap.String("url", url),
+			zap.String("division", divisionString),
+			zap.Error(err),
+		)
+
 		return nil, err
 	}
 
@@ -92,6 +107,11 @@ func (s ConferenceService) GetConferences() ([]models.Conference, error) {
 
 	for _, division := range pkg.Divisions {
 		if divisionConferences, err = s.GetConferencesByDivision(division); err != nil {
+			s.logger.Error("failed to retrieve conferences by division",
+				zap.String("division", pkg.DivisionToString(division)),
+				zap.Error(err),
+			)
+
 			return nil, err
 		}
 

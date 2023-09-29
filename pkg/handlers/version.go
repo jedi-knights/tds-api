@@ -7,6 +7,14 @@ import (
 	"net/http"
 )
 
+// HandleGetVersion godoc
+// @Summary Get the API's current version
+// @Description Get the current version of the API
+// @Tags Admin
+// @Accept  json
+// @Produce  json
+// @Success 200 {object} models.VersionResponse
+// @Router /version [get]
 func HandleGetVersion(c echo.Context) error {
 	var (
 		version string
