@@ -109,8 +109,6 @@ func HandleGetTeams(c echo.Context) error {
 		teams []models.Team
 	)
 
-	teams = make([]models.Team, 0)
-
 	api.GetLogger().Debug("HandleGetTeams")
 
 	// Get query parameters
