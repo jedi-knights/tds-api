@@ -38,11 +38,11 @@ func DivisionToString(division Division) string {
 }
 
 func StringToDivision(division string) Division {
-	if division == "" {
-		return DivisionAll
-	}
-
 	switch division {
+	case "":
+		return DivisionAll
+	case "all":
+		return DivisionAll
 	case "di":
 		return DivisionDI
 	case "dii":
