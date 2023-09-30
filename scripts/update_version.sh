@@ -4,7 +4,9 @@
 NEW_VERSION=$(semantic-release-cli print-version)
 
 # Update the VERSION constant in main.go using sed
-sed -i "s/const VERSION = \".*\"/const VERSION = \"$NEW_VERSION\"/" main.go
+sed -i "s#.*#$NEW_VERSION#" > a.out
+rm -f VERSION
+mv a.out VERSION
 
 # Commit the updated main.go file
 git add .

@@ -5,7 +5,7 @@ NEW_VERSION=$(semantic-release-cli print-version)
 
 # Update the version in main.go using sed
 # sed -i "s/@version .*/@version $NEW_VERSION/" main.go
-cat main.go | sed "s/\/\/ @version .*/\/\/ @version $NEW_VERSION/" > a.out
+cat main.go | sed "s#\/\/ @version .*#\/\/ @version $NEW_VERSION#" > a.out
 rm -f main.go
 mv a.out main.go
 
