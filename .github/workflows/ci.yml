@@ -101,6 +101,10 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           git_email: omar.crosby@gmail.com
           git_user: ocrosby
+      - name: Set Git User
+        run: |
+          git config --global user.email "omar.crosby@gmail.com"
+          git config --global user.name "Omar Crosby"
       - name: Update Version in VERSION
         run: bash scripts/update_version.sh
         env:
