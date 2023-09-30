@@ -1,5 +1,6 @@
 {
-  "branches": ['main'],
+  "npmRegistry": "https://example.com",
+  "branches": ["main"],
   "plugins": [
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
