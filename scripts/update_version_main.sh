@@ -12,6 +12,8 @@ mv a.out main.go
 go install github.com/swaggo/swag/cmd/swag@latest
 swag init -g main.go
 
+git status
+cat main.go
 
 # Commit the updated main.go file
 git add .
