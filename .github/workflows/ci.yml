@@ -85,7 +85,7 @@ jobs:
       - name: Build
         run: make build
 
-  Publish:
+  Release:
     needs: [Build]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     permissions:
@@ -99,3 +99,13 @@ jobs:
       - uses: go-semantic-release/action@v1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          git_email: omar.crosby@gmail.com
+          git_user: ocrosby
+      - name: Update Version in VERSION
+        run: bash scripts/update_version.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Update Version in main.go
+        run: bash scripts/update_version_main.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
