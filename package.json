@@ -1,14 +1,22 @@
 {
   "name": "tds-api",
-  "version": "1.0.0",
+  "version": "0.0.0-development",
   "description": "![GitHub Actions](https://github.com/jedi-knights/tds-api/workflows/CI/badge.svg)",
   "main": "index.js",
   "directories": {
     "doc": "docs"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "semantic-release": "semantic-release"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jedi-knights/tds-api.git"
+  },
+  "devDependencies": {
+    "semantic-release": "^22.0.5"
+  }
 }
