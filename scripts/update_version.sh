@@ -7,6 +7,5 @@ NEW_VERSION=$(semantic-release-cli print-version)
 sed -i "s/const VERSION = \".*\"/const VERSION = \"$NEW_VERSION\"/" main.go
 
 # Commit the updated main.go file
-git add main.go
-git add .semrel
+git add .
 git commit -m "chore: Update VERSION to $NEW_VERSION in main.go"
