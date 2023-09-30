@@ -92,31 +92,41 @@ jobs:
       contents: write
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v2
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
         with:
           node-version: '18'
-      - uses: actions/setup-go@v2
+
+      - name: Setup Go
+        uses: actions/setup-go@v2
         with:
           go-version: ${{ env.GO_VERSION }}
-      - name: Install semantic-release-cli
+
+      - name: Install Semantic Release CLI
         run: |
           npm install -g semantic-release-cli
-          export PATH=$PATH:./node_modules/.bin
-      - uses: go-semantic-release/action@v1
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          git_email: omar.crosby@gmail.com
-          git_user: ocrosby
+
       - name: Set Git User
         run: |
           git config --global user.email "omar.crosby@gmail.com"
           git config --global user.name "Omar Crosby"
-      - name: Update Version in VERSION
+
+      - name: Run Semantic Release
+        run: |
+          semantic-release-cli setup
+          semantic-release-cli
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update Version in VERSION file
         run: bash scripts/update_version.sh
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Update Version in main.go
+
+      - name: Update Version in main.go file
         run: bash scripts/update_version_main.sh
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
