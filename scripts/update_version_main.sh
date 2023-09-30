@@ -13,4 +13,5 @@ swag init -g main.go
 # Commit the updated main.go file
 git add main.go
 git add docs
+git add .semrel
 git commit -m "chore: Update version to $NEW_VERSION in main.go"
