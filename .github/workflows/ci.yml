@@ -30,10 +30,16 @@ jobs:
           go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
 
       - name: Generate Mocks
-        run: go generate ./...
+        run: |
+          pwd
+          ls
+          go generate ./...
 
       - name: Lint
-        run: golangci-lint run ./...
+        run: |
+          pwd
+          ls
+          golangci-lint run ./...
 
   Test:
     runs-on: ubuntu-latest
@@ -47,6 +53,8 @@ jobs:
 
       - name: Install Dependencies
         run: |
+          pwd
+          ls          
           go install go.uber.org/mock/mockgen@latest
           go install github.com/jstemmer/go-junit-report@latest
           go install github.com/onsi/ginkgo/v2/ginkgo
