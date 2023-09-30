@@ -1,0 +1,14 @@
+{
+  "name": "tds-api",
+  "version": "1.0.0",
+  "description": "![GitHub Actions](https://github.com/jedi-knights/tds-api/workflows/CI/badge.svg)",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
