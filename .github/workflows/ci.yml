@@ -119,7 +119,6 @@ jobs:
 
       - name: Run Semantic Release
         run: |
-          semantic-release-cli setup
           semantic-release-cli
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
