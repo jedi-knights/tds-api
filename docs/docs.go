@@ -18,7 +18,23 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/conferences/:division": {
+        "/v2/conferences": {
+            "get": {
+                "description": "Get a list of conferences",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Conferences"
+                ],
+                "summary": "Get a list of conferences",
+                "responses": {}
+            }
+        },
+        "/v2/conferences/:division": {
             "get": {
                 "description": "Get a list of conferences",
                 "consumes": [
@@ -61,7 +77,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/health": {
+        "/v2/health": {
             "get": {
                 "description": "Check if the API is up and running",
                 "consumes": [
@@ -78,15 +94,15 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/models.HealthCheckResponse"
+                            "$ref": "#/definitions/responses.HealthCheckResponse"
                         }
                     }
                 }
             }
         },
-        "/teams": {
+        "/v2/teams": {
             "get": {
-                "description": "Get a list of teams",
+                "description": "Get all teams",
                 "consumes": [
                     "application/json"
                 ],
@@ -96,60 +112,7 @@ const docTemplate = `{
                 "tags": [
                     "Teams"
                 ],
-                "summary": "Get a list of teams",
-                "parameters": [
-                    {
-                        "enum": [
-                            "both",
-                            "male",
-                            "female"
-                        ],
-                        "type": "string",
-                        "default": "both",
-                        "description": "Specify a gender",
-                        "name": "gender",
-                        "in": "query"
-                    },
-                    {
-                        "enum": [
-                            "all",
-                            "di",
-                            "dii",
-                            "diii",
-                            "naia",
-                            "njcaa"
-                        ],
-                        "type": "string",
-                        "default": "all",
-                        "description": "Specify a division you are interested in",
-                        "name": "division",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "Specify a conference you are interested in",
-                        "name": "conference",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "The name of the entity you are looking for",
-                        "name": "name",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "A partial name of the entity you are looking for",
-                        "name": "nameLike",
-                        "in": "query"
-                    },
-                    {
-                        "type": "integer",
-                        "description": "Specify a target id",
-                        "name": "id",
-                        "in": "query"
-                    }
-                ],
+                "summary": "Get all teams",
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -159,17 +122,11 @@ const docTemplate = `{
                                 "$ref": "#/definitions/models.Team"
                             }
                         }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/api.Error"
-                        }
                     }
                 }
             }
         },
-        "/version": {
+        "/v2/version": {
             "get": {
                 "description": "Get the current version of the API",
                 "consumes": [
@@ -186,7 +143,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/models.VersionResponse"
+                            "$ref": "#/definitions/responses.VersionResponse"
                         }
                     }
                 }
@@ -194,17 +151,6 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "api.Error": {
-            "type": "object",
-            "properties": {
-                "msg": {
-                    "type": "string"
-                },
-                "status": {
-                    "type": "integer"
-                }
-            }
-        },
         "models.Conference": {
             "type": "object",
             "properties": {
@@ -221,14 +167,6 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "url": {
-                    "type": "string"
-                }
-            }
-        },
-        "models.HealthCheckResponse": {
-            "type": "object",
-            "properties": {
-                "message": {
                     "type": "string"
                 }
             }
@@ -262,7 +200,15 @@ const docTemplate = `{
                 }
             }
         },
-        "models.VersionResponse": {
+        "responses.HealthCheckResponse": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "responses.VersionResponse": {
             "type": "object",
             "properties": {
                 "version": {
@@ -277,7 +223,7 @@ const docTemplate = `{
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
 	Host:             "localhost:8080",
-	BasePath:         "/api/v1",
+	BasePath:         "/api",
 	Schemes:          []string{},
 	Title:            "TopDrawerSoccer API",
 	Description:      "This is a simple API providing access to data from TopDrawerSoccer.",

@@ -9,6 +9,10 @@ const (
 	GenderUnknown
 )
 
+func (g Gender) String() string {
+	return GenderToString(g)
+}
+
 func GenderToString(gender Gender) string {
 	switch gender {
 	case GenderBoth:
@@ -26,7 +30,7 @@ func StringToGender(gender string) Gender {
 	if gender == "" {
 		return GenderBoth
 	}
-	
+
 	switch gender {
 	case "both":
 		return GenderBoth

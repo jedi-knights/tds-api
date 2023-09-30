@@ -1,5 +1,7 @@
 package pkg
 
+import "fmt"
+
 type Division int
 
 const (
@@ -18,6 +20,35 @@ var Divisions = []Division{
 	DivisionDIII,
 	DivisionNAIA,
 	DivisionNJCAA,
+}
+
+var divisionToUrlMapping = map[Division]string{
+	DivisionDI:    "https://www.topdrawersoccer.com/college-soccer/college-conferences/di/divisionid-1",
+	DivisionDII:   "https://www.topdrawersoccer.com/college-soccer/college-conferences/dii/divisionid-2",
+	DivisionDIII:  "https://www.topdrawersoccer.com/college-soccer/college-conferences/diii/divisionid-3",
+	DivisionNAIA:  "https://www.topdrawersoccer.com/college-soccer/college-conferences/naia/divisionid-4",
+	DivisionNJCAA: "https://www.topdrawersoccer.com/college-soccer/college-conferences/njcaa/divisionid-5",
+}
+
+func (d Division) String() string {
+	return DivisionToString(d)
+}
+
+func (d Division) Url() (string, error) {
+	var (
+		ok          bool
+		divisionUrl string
+	)
+
+	if d == DivisionAll {
+		return "", fmt.Errorf("cannot get url for DivisionAll")
+	}
+
+	if divisionUrl, ok = divisionToUrlMapping[d]; !ok {
+		return "", fmt.Errorf("unsupported division for url mapping: %v", d)
+	}
+
+	return divisionUrl, nil
 }
 
 func DivisionToString(division Division) string {
