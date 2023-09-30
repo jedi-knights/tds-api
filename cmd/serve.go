@@ -49,6 +49,7 @@ to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		e := echo.New()
 
+		e.HideBanner = true
 		e.Logger.SetLevel(log.DEBUG)
 
 		e.Logger.Info("Starting server")
