@@ -96,6 +96,10 @@ jobs:
       - uses: actions/setup-go@v2
         with:
           go-version: ${{ env.GO_VERSION }}
+      - name: Install semantic-release-cli
+        run: |
+          npm install -g semantic-release-cli
+          export PATH=$PATH:./node_modules/.bin
       - uses: go-semantic-release/action@v1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
