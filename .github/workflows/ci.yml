@@ -91,7 +91,8 @@ jobs:
           go mod download
 
       - name: Build
-        run: make build
+        run: |
+          go build -ldflags="-s -w" main.go
 
   Release:
     needs: [Build]
