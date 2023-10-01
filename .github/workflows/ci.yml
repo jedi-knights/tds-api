@@ -125,12 +125,14 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Update Version in VERSION file
-        run: bash scripts/update_version.sh
+        run: |
+          bash scripts/update_version.sh
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Update Version in main.go file
-        run: bash scripts/update_version_main.sh
+        run: |
+          bash scripts/update_version_main.sh
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
