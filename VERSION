@@ -1,1 +1,1 @@
-1.4.0
+semantic-release-cli (v5.4.4) Usage: semantic-release-cli setup [--tag=<String>] Options: -h --help Show this screen. -v --version Show version. --[no-]keychain Use keychain to get passwords [default: true]. --ask-for-passwords Ask for the passwords even if passwords are stored [default: false]. --tag=<String> npm tag to install [default: ’latest’]. --gh-token=<String> GitHub auth token --npm-token=<String> npm auth token --circle-token=<String> CircleCI auth token --npm-username=<String> npm username Aliases: init setup
