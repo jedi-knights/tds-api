@@ -11,6 +11,7 @@ echo $NEW_VERSION > VERSION
 git status
 cat VERSION
 
+
 # Commit the updated main.go file
 git add .
 git commit -m "chore: Update VERSION to $NEW_VERSION in main.go"
