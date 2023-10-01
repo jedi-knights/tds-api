@@ -6,9 +6,7 @@ set -e
 NEW_VERSION=$(semantic-release-cli print-version)
 
 # Update the VERSION constant in main.go using sed
-sed -i "s#.*#$NEW_VERSION#" > a.out
-rm -f VERSION
-mv a.out VERSION
+echo $NEW_VERSION > VERSION
 
 git status
 cat VERSION
