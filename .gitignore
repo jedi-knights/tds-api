@@ -2,3 +2,5 @@
 
 junit.xml
 
+# Binaries built for various platforms
+zbuild
