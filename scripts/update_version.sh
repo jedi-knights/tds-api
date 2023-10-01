@@ -1,4 +1,6 @@
 #!/bin/bash
+# exit when any command fails
+set -e
 
 # Determine the new version from Semantic Release (adjust as needed)
 NEW_VERSION=$(semantic-release-cli print-version)
