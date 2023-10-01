@@ -15,3 +15,4 @@ cat VERSION
 git add VERSION
 git status
 git commit -m "chore: Update VERSION to $NEW_VERSION in main.go [skip ci]"
+git push
