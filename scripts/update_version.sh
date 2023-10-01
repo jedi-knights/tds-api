@@ -13,4 +13,5 @@ cat VERSION
 
 # Commit the updated main.go file
 git add VERSION
-git commit -m "chore: Update VERSION to $NEW_VERSION in main.go"
+git status
+git commit -m "chore: Update VERSION to $NEW_VERSION in main.go [skip ci]"
